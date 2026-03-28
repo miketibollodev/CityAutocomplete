@@ -1,4 +1,4 @@
-# CitySuggest
+# CityAutocomplete
 
 On-device city name autocomplete for Apple platforms, powered by Apple Intelligence.
 
@@ -10,9 +10,9 @@ Adding city autocomplete to an Apple app sounds straightforward. In practice, th
 
 - **Bundled datasets** — Libraries that ship a static list of world cities work offline and have no usage limits, but they add megabytes to your app and require you to maintain your own fuzzy search logic. Ranking results by global relevance (rather than alphabetically) is non-trivial.
 - **`MKLocalSearchCompleter`** — Apple's built-in completer is designed for points of interest and routing, not for returning the top cities worldwide. It prioritises places near the user's current location, making it unreliable for apps that need globally relevant suggestions regardless of where the user is.
-- **Third-party APIs** (Google Places, Mapbox, etc.) — These return excellent results but introduce per-request pricing, rate limits, a network dependency, and a privacy consideration: every keystroke is sent to an external server.
+- **Third-party APIs** (Google Places, Mapbox, etc.) — These return excellent results but introduce per-request pricing, rate limits, a network dependency, and a privacy consideration.
 
-CitySuggest takes a different approach. It uses the on-device language model provided by Apple Intelligence — already present on the user's device, private, and free at the point of use — to generate ranked city suggestions from a partial query.
+CityAutocomplete takes a different approach. It uses the on-device language model provided by Apple Intelligence — already present on the user's device, private, and free at the point of use — to generate ranked city suggestions from a partial query.
 
 ---
 
@@ -28,19 +28,19 @@ CitySuggest takes a different approach. It uses the on-device language model pro
 In Xcode, go to **File → Add Package Dependencies** and enter the repository URL:
 
 ```
-https://github.com/your-org/CitySuggest
+https://github.com/miketibollodevg/CityAutocomplete
 ```
 
 Or add it directly to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-org/CitySuggest", from: "1.0.0")
+    .package(url: "https://github.com/miketibollodev/CityAutocomplete", from: "1.0.0")
 ],
 targets: [
     .target(
         name: "YourTarget",
-        dependencies: ["CitySuggest"]
+        dependencies: ["CityAutocomplete"]
     )
 ]
 ```
@@ -54,7 +54,7 @@ targets: [
 Apple Intelligence must be available and enabled at runtime. Check before presenting your search UI:
 
 ```swift
-import CitySuggest
+import CityAutocomplete
 
 let service = CitySearchService()
 
@@ -96,9 +96,9 @@ Each result is a `Location` — a lightweight, `Sendable`, `Codable` struct:
 | Property | Type | Example |
 |---|---|---|
 | `name` | `String` | `"Amsterdam"` |
-| `adminRegion` | `String` | `"North Holland"` |
-| `country` | `String` | `"Netherlands"` |
 | `countryCode` | `String` | `"NL"` |
+| `country` | `String` | `"Netherlands"` |
+| `adminRegion` | `String` | `"North Holland"` |
 | `latitude` | `Double` | `52.3676` |
 | `longitude` | `Double` | `4.9041` |
 | `coordinate` | `CLLocationCoordinate2D` | *(computed)* |

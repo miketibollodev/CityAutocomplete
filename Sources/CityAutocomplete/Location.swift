@@ -5,12 +5,13 @@
 //  Created by Michael Tibollo on 2026-03-28.
 //
 
+import CoreLocation
 import Foundation
 import FoundationModels
 
 /// A structured representation of a city result returned by CitySearchService.
 @Generable(description: "Structure defining a city")
-public struct Location: Identifiable, Equatable, Hashable, Sendable {
+public struct Location: Identifiable, Hashable, Codable, Sendable {
     
     public let id: UUID
     
@@ -54,5 +55,13 @@ public struct Location: Identifiable, Equatable, Hashable, Sendable {
         self.adminRegion = adminRegion
         self.lat = lat
         self.lon = lon
+    }
+}
+
+public extension Location {
+    
+    /// Convenience accessor returning a CoreLocation coordinate.
+    var coordinate: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
 }
