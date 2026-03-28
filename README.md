@@ -28,7 +28,7 @@ CityAutocomplete takes a different approach. It uses the on-device language mode
 In Xcode, go to **File → Add Package Dependencies** and enter the repository URL:
 
 ```
-https://github.com/miketibollodevg/CityAutocomplete
+https://github.com/miketibollodev/CityAutocomplete
 ```
 
 Or add it directly to your `Package.swift`:
