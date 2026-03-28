@@ -19,9 +19,5 @@ let package = Package(
         .target(
             name: "CityAutocomplete"
         ),
-        .testTarget(
-            name: "CityAutocompleteTests",
-            dependencies: ["CityAutocomplete"]
-        ),
     ]
 )

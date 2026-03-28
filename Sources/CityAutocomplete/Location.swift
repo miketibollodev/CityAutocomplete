@@ -8,15 +8,7 @@
 import Foundation
 import FoundationModels
 
-/// An actor that provides on-device city name autocomplete powered by Apple Intelligence.
-///
-/// Usage:
-/// ```swift
-/// let service = CitySearchService()
-/// let results = try await service.search("Aus")
-/// // → [Location(name: "Austin", countryCode: "US", ...),
-/// //    Location(name: "Auckland", countryCode: "NZ", ...)]
-/// ```
+/// A structured representation of a city result returned by CitySearchService.
 @Generable(description: "Structure defining a city")
 public struct Location: Identifiable, Equatable, Hashable, Sendable {
     
