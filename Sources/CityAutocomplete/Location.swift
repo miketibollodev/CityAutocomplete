@@ -11,10 +11,8 @@ import FoundationModels
 
 /// A structured representation of a city result returned by CitySearchService.
 @Generable(description: "Structure defining a city")
-public struct Location: Identifiable, Hashable, Codable, Sendable {
-    
-    public let id: UUID
-    
+public struct Location: Hashable, Codable, Sendable {
+        
     /// City name (example: "London")
     @Guide(description: "The city or town name")
     public let name: String
@@ -40,7 +38,6 @@ public struct Location: Identifiable, Hashable, Codable, Sendable {
     public let lon: Double
     
     public init(
-        id: UUID = UUID(),
         name: String,
         countryCode: String,
         country: String,
@@ -48,7 +45,6 @@ public struct Location: Identifiable, Hashable, Codable, Sendable {
         lat: Double,
         lon: Double
     ) {
-        self.id = id
         self.name = name
         self.countryCode = countryCode
         self.country = country
@@ -58,10 +54,15 @@ public struct Location: Identifiable, Hashable, Codable, Sendable {
     }
 }
 
-public extension Location {
+extension Location {
     
     /// Convenience accessor returning a CoreLocation coordinate.
-    var coordinate: CLLocationCoordinate2D {
+    public var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
+}
+
+extension Location: Identifiable {
+    
+    public var id: String { "\(name)-\(countryCode)-\(lat)-\(lon)" }
 }
